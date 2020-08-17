@@ -11,5 +11,3 @@ spring:
         file-extension: yaml
         enabled: true
         namespace: 5f6ce95b-28dc-4308-870a-32267674d215
-      discovery:
-        server-addr:  http://www.xinlitang.cn:8848

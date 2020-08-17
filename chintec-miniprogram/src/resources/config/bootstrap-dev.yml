@@ -1,8 +1,8 @@
 server:
-  port: 7070 #端口号
+  port: 8081 #端口号
 spring:
   application:
-    name: chintec-auth #应用名
+    name: chintec-miniprogram #应用名
   cloud:
     nacos:
       config:
@@ -10,6 +10,6 @@ spring:
         group: DEFAULT_GROUP
         file-extension: yaml
         enabled: true
-        namespace: 5f6ce95b-28dc-4308-870a-32267674d215
+        namespace: fd0e71e5-1d43-41f9-a3c6-abf0828f5762
       discovery:
         server-addr:  http://www.xinlitang.cn:8848

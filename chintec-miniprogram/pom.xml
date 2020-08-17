@@ -20,6 +20,11 @@
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
     <dependencies>
+        <!--openfeign-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
         <!--nacos 配置-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>

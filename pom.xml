@@ -130,9 +130,9 @@
         </profile>
         <!--测试环境 -->
         <profile>
-            <id>int</id>
+            <id>test</id>
             <properties>
-                <profiles.active>int</profiles.active>
+                <profiles.active>test</profiles.active>
             </properties>
         </profile>
         <!--生产环境 -->

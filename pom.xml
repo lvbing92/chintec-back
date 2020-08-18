@@ -7,6 +7,8 @@
         <module>chintec-auth</module>
         <module>chintec-backoffice</module>
         <module>chintec-miniprogram</module>
+        <module>chintec-message</module>
+        <module>chintec-order</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

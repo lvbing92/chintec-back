@@ -9,6 +9,8 @@
         <module>chintec-miniprogram</module>
         <module>chintec-message</module>
         <module>chintec-order</module>
+        <module>chintec-common</module>
+        <module>chintec-generator</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

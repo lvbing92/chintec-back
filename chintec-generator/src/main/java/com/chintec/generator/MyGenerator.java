@@ -1,6 +1,8 @@
 package com.chintec.generator;
 
 
+import com.chintec.generator.config.GeneratorConfig;
+
 /**
  * @author Jeff·Tang
  * @version 1.0

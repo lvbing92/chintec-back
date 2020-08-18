@@ -1,4 +1,4 @@
-package com.chintec.generator;
+package com.chintec.generator.config;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;

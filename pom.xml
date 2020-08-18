@@ -35,7 +35,7 @@
         <fastjson.version>1.2.70</fastjson.version>
         <c3p0.version>0.9.5.5</c3p0.version>
         <spring.cloud.version>Hoxton.RELEASE</spring.cloud.version>
-        <spring-cloud-alibaba.version>2.2.1.RELEASE</spring-cloud-alibaba.version>
+        <spring-cloud-alibaba.version>2.2.0.RELEASE</spring-cloud-alibaba.version>
     </properties>
     <dependencyManagement>
         <dependencies>

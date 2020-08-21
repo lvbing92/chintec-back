@@ -40,7 +40,7 @@ public class SmsServiceImpl implements ISmsServices {
         AssertsUtil.isTrue(!StringUtils.isEmpty(expire) && expire > 240, "请勿重复发送验证码");
         Integer code = getCode();
         SendSmsResponse sendSmsResponse = sendSms(phone, code);
-        System.out.println(sendSmsResponse.getMessage());
+        log.info(sendSmsResponse.getMessage());
         AssertsUtil.isTrue(!"OK".equals(sendSmsResponse.getMessage()), "短信发送失败");
         stringObjectValueOperations.set(phone, String.valueOf(code));
         redisTemplate.expire(phone, 300, TimeUnit.SECONDS);

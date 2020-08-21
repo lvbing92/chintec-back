@@ -5,6 +5,7 @@ import com.chintec.common.util.AssertsUtil;
 import com.chintec.message.entity.MessageRec;
 import com.chintec.message.service.ISmsServices;
 import com.rabbitmq.client.Channel;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.*;
 import org.springframework.amqp.support.AmqpHeaders;
@@ -23,6 +24,7 @@ import java.util.Map;
  * @version 1.0
  * @date 2020/8/20 10:51
  */
+@Slf4j
 @Component
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
 public class MessageMqListener {
@@ -48,11 +50,8 @@ public class MessageMqListener {
             // 手动签收消息,通知mq服务器端删除该消息
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            Object o = headers.get(AmqpHeaders.DELIVERY_TAG);
+            log.info(e.getMessage());
             long deliveryTag = message.getMessageProperties().getDeliveryTag();
-            System.out.println(o);
-            System.out.println(deliveryTag);
             channel.basicNack(deliveryTag, false, false);
         }
     }

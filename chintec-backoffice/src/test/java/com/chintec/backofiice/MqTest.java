@@ -1,6 +1,6 @@
 package com.chintec.backofiice;
 
-import com.chintec.backofiice.util.MqSendUtil;
+import com.chintec.backofiice.mq.MqSendMessage;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,10 +13,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class MqTest {
     @Autowired
-    private MqSendUtil mqSendUtil;
+    private MqSendMessage mqSendMessage;
 
     @Test
     void setMqSendUtil() {
-        mqSendUtil.send();
+        mqSendMessage.send("18206116926");
     }
 }

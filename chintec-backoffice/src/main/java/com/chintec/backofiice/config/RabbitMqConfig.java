@@ -1,31 +1,13 @@
 package com.chintec.backofiice.config;
 
-import com.rabbitmq.client.Channel;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.*;
-import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
-import org.springframework.amqp.rabbit.connection.Connection;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.connection.ConnectionListener;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
-import org.springframework.amqp.rabbit.listener.api.ChannelAwareMessageListener;
-import org.springframework.amqp.rabbit.transaction.RabbitTransactionManager;
-import org.springframework.amqp.support.ConsumerTagStrategy;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionDefinition;
-import org.springframework.transaction.TransactionException;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.annotation.Transactional;
-import reactor.util.annotation.NonNullApi;
+import org.springframework.stereotype.Component;
 
-import java.util.UUID;
 
 /**
  * @author Jeff·Tang
@@ -33,8 +15,11 @@ import java.util.UUID;
  * @date 2020/8/20 11:07
  */
 @Configuration
-@Slf4j
 public class RabbitMqConfig {
+
+    @Autowired
+    RabbitAdmin rabbitAdmin;
+
     /**
      * 申明队列
      *
@@ -62,7 +47,21 @@ public class RabbitMqConfig {
      */
     @Bean
     public Binding binding() {
-        return BindingBuilder.bind(queue()).to(topicExchange()).with("topic.msg");
+        return BindingBuilder.bind(queue()).to(topicExchange()).with("topic.with");
+    }
+
+    @Bean
+    public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {
+        RabbitAdmin rabbitAdmin = new RabbitAdmin(connectionFactory);
+        // 只有设置为 true，spring 才会加载 RabbitAdmin 这个类
+        rabbitAdmin.setAutoStartup(true);
+        return rabbitAdmin;
+    }
+
+    @Bean
+    public void createExchangeQueue() {
+        rabbitAdmin.declareExchange(topicExchange());
+        rabbitAdmin.declareQueue(queue());
     }
 
 }

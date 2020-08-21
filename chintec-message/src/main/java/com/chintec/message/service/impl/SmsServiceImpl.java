@@ -41,7 +41,7 @@ public class SmsServiceImpl implements ISmsServices {
         Integer code = getCode();
         SendSmsResponse sendSmsResponse = sendSms(phone, code);
         System.out.println(sendSmsResponse.getMessage());
-        AssertsUtil.isTrue("OK".equals(sendSmsResponse.getMessage()), "短信发送失败");
+        AssertsUtil.isTrue(!"OK".equals(sendSmsResponse.getMessage()), "短信发送失败");
         stringObjectValueOperations.set(phone, String.valueOf(code));
         redisTemplate.expire(phone, 300, TimeUnit.SECONDS);
     }

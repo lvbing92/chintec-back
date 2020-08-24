@@ -3,6 +3,7 @@ package com.chintec.message.entity;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author Jeff·Tang
@@ -11,7 +12,16 @@ import java.io.Serializable;
  */
 @Data
 public class MessageRec implements Serializable {
+    /**
+     * 消息类型0 是消息推送 1 为短信发送
+     */
     private Integer type;
+    /**
+     * 消息内容
+     */
     private String message;
-    private Integer userId;
+    /**
+     * 用户id集合
+     */
+    private List<Integer> userIds;
 }

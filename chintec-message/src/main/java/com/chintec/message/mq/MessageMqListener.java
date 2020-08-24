@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.chintec.common.util.AssertsUtil;
 import com.chintec.common.util.ResultResponse;
 import com.chintec.message.entity.MessageRec;
+import com.chintec.message.service.ISendMessageService;
 import com.chintec.message.service.ISmsServices;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +32,8 @@ import java.util.Map;
 public class MessageMqListener {
     @Autowired
     private ISmsServices iSmsServices;
+    @Autowired
+    private ISendMessageService iSendMessageService;
 
     @RabbitListener(queues = "message")
     @RabbitHandler
@@ -44,6 +47,8 @@ public class MessageMqListener {
                     AssertsUtil.isTrue(!resultResponse.isSuccess(), resultResponse.getMessage());
                     break;
                 case 0:
+                    ResultResponse resultResponse1 = iSendMessageService.sendMessages(messageRec);
+                    AssertsUtil.isTrue(!resultResponse1.isSuccess(), resultResponse1.getMessage());
                     break;
                 default:
                     AssertsUtil.isTrue(true, "无此消息类型");

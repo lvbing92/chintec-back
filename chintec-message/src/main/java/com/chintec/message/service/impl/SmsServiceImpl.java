@@ -5,6 +5,7 @@ import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.chintec.common.util.AssertsUtil;
+import com.chintec.common.util.ResultResponse;
 import com.chintec.message.service.ISmsServices;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class SmsServiceImpl implements ISmsServices {
     private RedisTemplate<String, String> redisTemplate;
 
     @Override
-    public void sendSms(String phone) {
+    public ResultResponse sendSms(String phone) {
         ValueOperations<String, String> stringObjectValueOperations = redisTemplate.opsForValue();
         Long expire = redisTemplate.getExpire(phone);
         AssertsUtil.isTrue(!StringUtils.isEmpty(expire) && expire > 240, "请勿重复发送验证码");
@@ -44,14 +45,16 @@ public class SmsServiceImpl implements ISmsServices {
         AssertsUtil.isTrue(!"OK".equals(sendSmsResponse.getMessage()), "短信发送失败");
         stringObjectValueOperations.set(phone, String.valueOf(code));
         redisTemplate.expire(phone, 300, TimeUnit.SECONDS);
+        return ResultResponse.successResponse("发送信息成功");
     }
 
     @Override
-    public void checkCode(String phone, String code) {
+    public ResultResponse checkCode(String phone, String code) {
         AssertsUtil.isTrue(StringUtils.isEmpty(code), "验证码不能为空");
         ValueOperations<String, String> stringObjectValueOperations = redisTemplate.opsForValue();
         String s = stringObjectValueOperations.get(phone);
         AssertsUtil.isTrue(StringUtils.isEmpty(s), "验证码错误，请重试");
+        return ResultResponse.successResponse("验证码验证成功");
     }
 
     private Integer getCode() {

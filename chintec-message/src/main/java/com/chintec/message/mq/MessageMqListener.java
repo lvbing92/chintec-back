@@ -2,6 +2,7 @@ package com.chintec.message.mq;
 
 import com.alibaba.fastjson.JSONObject;
 import com.chintec.common.util.AssertsUtil;
+import com.chintec.common.util.ResultResponse;
 import com.chintec.message.entity.MessageRec;
 import com.chintec.message.service.ISmsServices;
 import com.rabbitmq.client.Channel;
@@ -39,7 +40,8 @@ public class MessageMqListener {
         try {
             switch (messageRec.getType()) {
                 case 1:
-                    iSmsServices.sendSms(messageRec.getMessage());
+                    ResultResponse resultResponse = iSmsServices.sendSms(messageRec.getMessage());
+                    AssertsUtil.isTrue(!resultResponse.isSuccess(), resultResponse.getMessage());
                     break;
                 case 0:
                     break;

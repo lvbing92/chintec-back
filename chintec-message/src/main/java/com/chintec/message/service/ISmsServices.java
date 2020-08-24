@@ -1,5 +1,7 @@
 package com.chintec.message.service;
 
+import com.chintec.common.util.ResultResponse;
+
 /**
  * @author Jeff·Tang
  * @version 1.0
@@ -9,15 +11,17 @@ public interface ISmsServices {
     /**
      * 发送短信
      *
-     * @param phone
+     * @param phone 手机号
+     * @return resultResponse
      */
-    void sendSms(String phone);
+    ResultResponse sendSms(String phone);
 
     /**
      * 检验验证码
      *
-     * @param phone
-     * @param code
+     * @param phone 手机号
+     * @param code  验证码
+     * @return resultResponse
      */
-    void checkCode(String phone, String code);
+    ResultResponse checkCode(String phone, String code);
 }

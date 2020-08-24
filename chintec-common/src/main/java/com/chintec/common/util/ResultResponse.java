@@ -1,5 +1,6 @@
 package com.chintec.common.util;
 
+import com.chintec.common.enums.CommonCodeEnum;
 import lombok.Data;
 import org.springframework.util.StringUtils;
 
@@ -12,8 +13,8 @@ import org.springframework.util.StringUtils;
  */
 @Data
 public class ResultResponse<T> {
-    private Integer code = 200;
-    private String message = "SUCCESS";
+    private Integer code = CommonCodeEnum.COMMON_SUCCESS_CODE.getCode();
+    private String message = CommonCodeEnum.COMMON_SUCCESS_CODE.getMessage();
     private boolean isSuccess = true;
     private T data;
 
@@ -120,12 +121,12 @@ public class ResultResponse<T> {
         if (!StringUtils.isEmpty(message)) {
             objectResultResponse.setMessage(message);
         } else {
-            objectResultResponse.setMessage("FALSE");
+            objectResultResponse.setMessage(CommonCodeEnum.COMMON_FALSE_CODE.getMessage());
         }
         if (!StringUtils.isEmpty(code)) {
             objectResultResponse.setCode(code);
         } else {
-            objectResultResponse.setCode(4000);
+            objectResultResponse.setCode(CommonCodeEnum.COMMON_FALSE_CODE.getCode());
         }
         objectResultResponse.setData(data);
 

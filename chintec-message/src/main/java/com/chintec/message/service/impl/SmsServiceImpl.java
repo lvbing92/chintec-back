@@ -58,7 +58,7 @@ public class SmsServiceImpl implements ISmsServices {
     }
 
     private Integer getCode() {
-        return (int) ((Math.random() * 9 + 1) * 1000);
+        return (int) ((Math.random() * 9 + 1) * 10000);
     }
 
     private SendSmsResponse sendSms(String phone, Integer code) {

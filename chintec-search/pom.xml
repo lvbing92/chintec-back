@@ -2,17 +2,20 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>chintec-back</artifactId>
         <groupId>com.chintec</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.chintec.auth</groupId>
-    <artifactId>chintec-auth</artifactId>
-    <name>chintec-auth</name>
+    <groupId>com.chintec.search</groupId>
+    <artifactId>chintec-search</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <name>chintec-search</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
@@ -69,10 +72,10 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.flywaydb</groupId>-->
-<!--            <artifactId>flyway-core</artifactId>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.flywaydb</groupId>-->
+        <!--            <artifactId>flyway-core</artifactId>-->
+        <!--        </dependency>-->
         <!-- Fast JSON-->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -145,13 +148,4 @@
             <artifactId>druid</artifactId>
         </dependency>
     </dependencies>
-    <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <!--用于替换resources里的变量-->
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-    </build>
 </project>

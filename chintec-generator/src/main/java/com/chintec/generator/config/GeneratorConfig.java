@@ -40,16 +40,16 @@ public class GeneratorConfig {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:postgresql://sprint-one-database.postgres.database.azure.com:5432/postgres?useSSL=false&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://118.190.132.87:3306/chintec?useUnicode=true&characterEncoding=UTF-8");
         dsc.setSchemaName("public");
-        dsc.setDriverName("org.postgresql.Driver");
-        dsc.setUsername("chintec@sprint-one-database");
-        dsc.setPassword("iS5Gz9M7s");
+        dsc.setDriverName("com.mysql.jdbc.Driver");
+        dsc.setUsername("root");
+        dsc.setPassword("root");
         mpg.setDataSource(dsc);
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("com.decathlon.china");
+        pc.setParent("com.chintec.auth");
         mpg.setPackageInfo(pc);
         pc.setModuleName(modules);
 

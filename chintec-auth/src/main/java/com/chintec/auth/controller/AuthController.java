@@ -1,5 +1,9 @@
 package com.chintec.auth.controller;
 
+import com.chintec.auth.service.IUserService;
+import com.chintec.common.util.ResultResponse;
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,16 +21,15 @@ import java.util.Map;
 @RestController
 @RequestMapping("/v1")
 public class AuthController {
-    @GetMapping("auths")
-    public List<Map<String, Object>> getUsers() {
-        Map<String, Object> userMap = new HashMap<>(4);
-        userMap.put("name", "张三");
-        userMap.put("id", 1);
-        userMap.put("age", 20);
-        Map<String, Object> userMap1 = new HashMap<>(4);
-        userMap1.put("name", "李四");
-        userMap1.put("id", 2);
-        userMap1.put("age", 18);
-        return Arrays.asList(userMap, userMap1);
+    @Autowired
+    private IUserService iUserService;
+
+    public ResultResponse userLogin(){
+        return ResultResponse.successResponse("后端登录成功");
+    }
+
+    @GetMapping("/user")
+    public ResultResponse getUser() {
+        return ResultResponse.successResponse(iUserService.getUser());
     }
 }

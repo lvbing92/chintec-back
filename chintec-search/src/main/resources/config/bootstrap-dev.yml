@@ -1,0 +1,13 @@
+server:
+  port: 7077 #端口号
+spring:
+  application:
+    name: chintec-search #应用名
+  cloud:
+    nacos:
+      config:
+        server-addr: http://www.xinlitang.cn:8848
+        group: DEFAULT_GROUP
+        file-extension: yaml
+        enabled: true
+        namespace: fd0e71e5-1d43-41f9-a3c6-abf0828f5762

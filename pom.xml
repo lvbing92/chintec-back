@@ -11,6 +11,7 @@
         <module>chintec-order</module>
         <module>chintec-common</module>
         <module>chintec-generator</module>
+        <module>chintec-search</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -39,6 +40,10 @@
         <elasticsearch.server.version>7.4.2</elasticsearch.server.version>
         <elasticsearch.client.version>7.4.2</elasticsearch.client.version>
         <elasticsearch.high.client.version>7.4.2</elasticsearch.high.client.version>
+        <mysql.version>5.1.39</mysql.version>
+        <mybatis.version>1.3.2</mybatis.version>
+        <!-- druid 连接池依赖 -->
+        <druid.version>1.1.21</druid.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -72,12 +77,6 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-simple</artifactId>
                 <version>${slf4j.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
-            <dependency>
-                <groupId>com.mchange</groupId>
-                <artifactId>c3p0</artifactId>
-                <version>${c3p0.version}</version>
             </dependency>
             <!--mq-->
             <dependency>
@@ -138,6 +137,24 @@
                 <groupId>org.elasticsearch.client</groupId>
                 <artifactId>elasticsearch-rest-high-level-client</artifactId>
                 <version>${elasticsearch.high.client.version}</version>
+            </dependency>
+            <!-- MySQL 连接驱动依赖 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!--springboot-mybatis-->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <!-- druid 连接池依赖 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

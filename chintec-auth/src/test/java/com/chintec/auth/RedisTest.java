@@ -1,5 +1,7 @@
 package com.chintec.auth;
 
+import com.chintec.common.util.PhoneUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +18,7 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0
  * @date 2020/8/17 9:50
  */
+@Slf4j
 @SpringBootTest
 class RedisTest {
     @Autowired
@@ -23,6 +26,11 @@ class RedisTest {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
+    @Test
+    public void testPhone(){
+
+        assert PhoneUtils.phoneCheck("13434343434");
+    }
     @Test
     void redisTest01() {
         ValueOperations valueOperations = redisTemplate.opsForValue();
@@ -37,7 +45,7 @@ class RedisTest {
 
     @Test
     void redisTest03() {
-        System.out.println(stringRedisTemplate.getExpire("name", TimeUnit.SECONDS));
+        log.info(String.valueOf(stringRedisTemplate.getExpire("name", TimeUnit.SECONDS)));
     }
 
     @Test

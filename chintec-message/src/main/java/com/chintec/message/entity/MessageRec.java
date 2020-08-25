@@ -1,5 +1,6 @@
 package com.chintec.message.entity;
 
+import com.chintec.message.entity.dto.MailSendDTO;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -24,4 +25,6 @@ public class MessageRec implements Serializable {
      * 用户id集合
      */
     private List<Integer> userIds;
+
+    private Object mailSendDTO;
 }

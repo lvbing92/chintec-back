@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.chintec.common.util.AssertsUtil;
 import com.chintec.common.util.ResultResponse;
 import com.chintec.message.entity.MessageRec;
+import com.chintec.message.entity.dto.MailSendDTO;
+import com.chintec.message.service.IEmailService;
 import com.chintec.message.service.ISendMessageService;
 import com.chintec.message.service.ISmsServices;
 import com.rabbitmq.client.Channel;
@@ -34,6 +36,8 @@ public class MessageMqListener {
     private ISmsServices iSmsServices;
     @Autowired
     private ISendMessageService iSendMessageService;
+    @Autowired
+    private IEmailService iEmailService;
 
     @RabbitListener(queues = "message")
     @RabbitHandler
@@ -49,6 +53,12 @@ public class MessageMqListener {
                 case 0:
                     ResultResponse resultResponse1 = iSendMessageService.sendMessages(messageRec);
                     AssertsUtil.isTrue(!resultResponse1.isSuccess(), resultResponse1.getMessage());
+                    break;
+                case 2:
+                    Object mailSendDTO = messageRec.getMailSendDTO();
+                    AssertsUtil.isTrue(mailSendDTO == null, "请填写发送的邮件内容");
+                    ResultResponse resultResponse2 = iEmailService.sendSimpleMailMessage(JSONObject.parseObject(JSONObject.toJSONString(mailSendDTO), MailSendDTO.class));
+                    AssertsUtil.isTrue(!resultResponse2.isSuccess(), "邮件发送失败");
                     break;
                 default:
                     AssertsUtil.isTrue(true, "无此消息类型");

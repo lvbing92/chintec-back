@@ -11,3 +11,16 @@ spring:
         file-extension: yaml
         enabled: true
         namespace: fd0e71e5-1d43-41f9-a3c6-abf0828f5762
+security:
+  oauth2:
+    resource:
+      ####从认证授权中心上验证token
+      tokenInfoUri: http://localhost:7070/oauth/check_token
+      preferTokenInfo: true
+    client:   ## 获取accesstoken地址
+      accessTokenUri: http://localhost:7070/oauth/token
+      userAuthorizationUri: http://localhost:7070/oauth/authorize  ###授权地址
+      ###appid
+      clientId: client_1
+      ###appSecret
+      clientSecret: 123456

@@ -10,6 +10,6 @@ import com.chintec.generator.config.GeneratorConfig;
  */
 public class MyGenerator {
     public static void main(String[] args) {
-    GeneratorConfig.getMyGenerator("class_pack","class_pack","Jeff·Tang");
+    GeneratorConfig.getMyGenerator("User","t_user","Jeff·Tang");
     }
 }

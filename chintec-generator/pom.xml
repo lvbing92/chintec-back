@@ -28,9 +28,10 @@
       <artifactId>mybatis-plus-generator</artifactId>
       <version>3.3.2</version>
     </dependency>
+    <!-- MySQL 连接驱动依赖 -->
     <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>

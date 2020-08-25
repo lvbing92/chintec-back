@@ -26,7 +26,7 @@ class RedisTest {
     @Test
     void redisTest01() {
         ValueOperations valueOperations = redisTemplate.opsForValue();
-        assert Objects.equals(valueOperations.get("1"), 2);
+        assert Objects.equals(valueOperations.get("18206116926"), "3644");
     }
 
     @Test

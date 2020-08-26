@@ -40,5 +40,15 @@
             <version>${projectlombok.version}</version>
             <scope>provided</scope>
         </dependency>
+        <!--http请求依赖包-->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.jdom/jdom2 -->
+        <dependency>
+            <groupId>org.jdom</groupId>
+            <artifactId>jdom2</artifactId>
+        </dependency>
     </dependencies>
 </project>

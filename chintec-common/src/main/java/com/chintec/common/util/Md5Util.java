@@ -4,6 +4,9 @@ import java.security.MessageDigest;
 import java.util.Base64;
 
 
+/**
+ * @author rubin
+ */
 public class Md5Util {
 	
 	public static String  encode(String msg){

@@ -1,6 +1,7 @@
 package com.chintec.miniprogram.service;
 
 import com.chintec.common.util.ResultResponse;
+import com.chintec.miniprogram.entity.request.BeanOrder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,17 +13,16 @@ import javax.servlet.http.HttpServletResponse;
  * @version 1.0
  * @date 2020/8/26 15:09
  */
-public interface IWeCatPayService {
+public interface IWeChatPayService {
     /**
      * 此方法用于微信支付接口调用和签名 返回给前台一个签名用于发起微信支付
      * 此方法一般用于app和小程序调用微信支付
      *
-     * @param openId  用户openId唯一
-     * @param orderSn 订单号 唯一
-     * @param request httpServiletRequest
+     * @param beanOrder 支付请求类包含订单 客户端 支付方式信息
+     * @param request   httpServiletRequest
      * @return ResultResponse
      */
-    ResultResponse weCatPay(String openId, String orderSn, HttpServletRequest request);
+    ResultResponse weChatPay(BeanOrder beanOrder, HttpServletRequest request);
 
     /**
      * 此方法用于微信支付后的回调方法

@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
+ * 关闭订单序列化类
+ *
  * @author Jeff·Tang
  * @version 1.0
  * @date 2020/8/27 11:26

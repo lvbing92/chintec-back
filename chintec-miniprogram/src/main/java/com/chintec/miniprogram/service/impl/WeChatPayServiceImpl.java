@@ -61,9 +61,8 @@ public class WeChatPayServiceImpl implements IWeChatPayService {
      */
     @Value("${wechat.sign_type}")
     private String signType;
-
     /**
-     * 支付提示名：
+     * 支付商品提示名：
      */
     @Value("${wechat.body}")
     private String body;
@@ -77,7 +76,7 @@ public class WeChatPayServiceImpl implements IWeChatPayService {
 
     /**
      * 此方法用于微信支付接口调用和签名 返回给前台一个签名用于发起微信支付
-     * 此方法一般用于小程序调用微信支付
+     * 此方法一般用于小程序，app，扫码支付
      * <p>
      * tradeType JSAPI 为小程序支付，需要openId为毕传
      * 当交易类型为其它类型的时候 不在需要openid
@@ -90,20 +89,29 @@ public class WeChatPayServiceImpl implements IWeChatPayService {
      */
     @Override
     public ResultResponse weChatPay(BeanOrder beanOrder, HttpServletRequest request) {
-        String sign = "";
         try {
             /*
              * 交易类型 ：
              * JSAPI(小程序支付)，
              * NATIVE扫码支付，
-             * APP(APP支付)，
-             * MWEB--H5支付
+             * APP(APP支付)
              */
-            String tradeType = "JSAPI";
-            if (beanOrder.getClient() == 2) {
-                tradeType = "NATIVE";
-            } else if (beanOrder.getClient() == 3) {
-                tradeType = "APP";
+            String tradeType = "";
+            switch (beanOrder.getClient()) {
+                case 0:
+                    //小程序交易
+                    tradeType = "JSAPI";
+                    break;
+                case 1:
+                    //扫码支付
+                    tradeType = "NATIVE";
+                    break;
+                case 2:
+                    //app支付
+                    tradeType = "APP";
+                    break;
+                default:
+                    break;
             }
             Map<String, String> packageParams = getMap(beanOrder, request);
             packageParams.put("trade_type", tradeType);
@@ -116,8 +124,7 @@ public class WeChatPayServiceImpl implements IWeChatPayService {
             String nonceStr = packageParams.get("nonce_str");
             log.info("=======================第一次签名：" + mysign + "============ ======");
             //拼接统一下单接口使用的XML数据,要将上一步生成的签名一起拼接进去
-            OrderVo orderVo = new OrderVo(body, URLEncoder.encode(mchId.trim(), StandardCharsets.UTF_8), nonceStr, notifyUrl, beanOrder.getOpenId(), beanOrder.getOrderSn(), packageParams.get("spbill_create_ip"), packageParams.get("money"), tradeType.trim(), mysign);
-            orderVo.setAppid(appId);
+            OrderVo orderVo = new OrderVo(appId, body, URLEncoder.encode(mchId.trim(), StandardCharsets.UTF_8), nonceStr, notifyUrl, beanOrder.getOpenId(), beanOrder.getOrderSn(), packageParams.get("spbill_create_ip"), packageParams.get("money"), tradeType.trim(), mysign);
             String xmlString = getXMLString(orderVo);
             log.info("调试模式_统一下单接口请求XML数据：" + xmlString);
             //调用统一下单接口,并接受返回的结果
@@ -133,7 +140,9 @@ public class WeChatPayServiceImpl implements IWeChatPayService {
                 //业务结果状态码 交易标识符
                 String resultCode = (String) map.get("result_code");
                 if (CommonCodeEnum.COMMON_SUCCESS_CODE.getMessage().equals(resultCode)) {
-                    if (beanOrder.getClient() == 2) {
+                    String sign = "";
+                    //判断客户端方式
+                    if (beanOrder.getClient() == 1) {
                         String url = (String) map.get("code_url");
                         response.put("codeUrl", url + "&redirect_url=" + notifyUrl);
                         sign = JSON.toJSONString(response);
@@ -145,8 +154,6 @@ public class WeChatPayServiceImpl implements IWeChatPayService {
                         long timeStamp = System.currentTimeMillis() / 1000;
                         //这边要将返回的时间戳转化成字符串,不然小程序端调用wx.requestPayment方法会报签名错误
                         response.put("timeStamp", timeStamp + "");
-//                String stringSignTemp = "appid=" + WxPayConfig.appid + "&timestamp=" + timeStamp + "&noncestr=" + nonce_str + "&package=prepay_id="
-//                        + prepayId + "&signtype=" + WxPayConfig.SIGNTYPE;
                         //再次签名,这个签名用于小程序端调用wx.requesetPayment方法
                         String linkString = "appId=" + appId + "&nonceStr=" + nonceStr + "&package=prepay_id=" + prepayId + "&signType=" + signType + "&timeStamp=" + timeStamp;
                         String paySign = PayUtils.sign(linkString, key, "utf-8").toUpperCase();
@@ -250,7 +257,7 @@ public class WeChatPayServiceImpl implements IWeChatPayService {
             CloseOrderVo closeOrderVo = new CloseOrderVo(data.get("appid"), data.get("mch_id"), PayUtils.getRandomStringByLength(32), orderNo, sign);
             String xmlString = getXMLString(closeOrderVo);
             //调用统一下单接口,并接受返回的结果
-            String result = PayUtils.httpRequest(payUrl, "POST", xmlString);
+            String result = PayUtils.httpRequest("这个微信关闭订单接口地址", "POST", xmlString);
             Map map = PayUtils.doXMLParse(result);
             String returnCode = (String) map.get("return_code");
             if (CommonCodeEnum.COMMON_SUCCESS_CODE.getMessage().equals(returnCode)) {

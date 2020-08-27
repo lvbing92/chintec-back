@@ -11,7 +11,7 @@ import lombok.Data;
 public class BeanOrder {
     private Long productId;
     /**
-     * 下单客户端id：0小程序，1为H5,2为pc，3为app
+     * 下单客户端id：0小程序，1pc，2为app
      */
     private Integer client = 0;
     /**

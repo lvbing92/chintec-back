@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.io.Serializable;
 
@@ -36,12 +38,5 @@ public class TUser implements Serializable {
     private String lastLogin;
     @ApiModelProperty(value = "最后登录Ip")
     private String lastIp;
-//    @ApiModelProperty(value = "创建时间")
-//    private String createTime;
-//    @ApiModelProperty(value = "更新时间")
-//    private String updateTime;
-//    @ApiModelProperty(value = "更新人Id")
-//    private String updateById;
-//    @ApiModelProperty(value = "更新人名称")
-//    private String updateByName;
+
 }

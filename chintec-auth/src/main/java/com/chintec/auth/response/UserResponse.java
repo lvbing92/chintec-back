@@ -1,8 +1,11 @@
 package com.chintec.auth.response;
 
 import com.chintec.auth.entity.TUser;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.Set;
 
 /**
  * @author rubin
@@ -11,4 +14,6 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Data
 public class UserResponse extends TUser {
+    @ApiModelProperty(value = "用户角色")
+    private Set<GrantedAuthority> roles;
 }

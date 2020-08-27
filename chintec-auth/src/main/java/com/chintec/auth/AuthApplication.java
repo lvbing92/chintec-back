@@ -14,7 +14,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableAuthorizationServer
 @MapperScan("com.chintec.auth.mapper")
 //@EnableOAuth2Sso
 public class AuthApplication {

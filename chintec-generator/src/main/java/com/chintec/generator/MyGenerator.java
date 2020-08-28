@@ -10,6 +10,6 @@ import com.chintec.generator.config.GeneratorConfig;
  */
 public class MyGenerator {
     public static void main(String[] args) {
-    GeneratorConfig.getMyGenerator("credentials","credentials","ruBIn·lv");
+    GeneratorConfig.getMyGenerator("oauthClientDetails","oauth_client_details","ruBIn·lv");
     }
 }

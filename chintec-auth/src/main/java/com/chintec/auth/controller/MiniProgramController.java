@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1")
 public class MiniProgramController {
 
-    @GetMapping(value = "/login")
+    @GetMapping(value = "/minilogin")
     public ResultResponse miniLogin(){
     return ResultResponse.successResponse("小程序登录成功");
     }

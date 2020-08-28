@@ -1,6 +1,5 @@
 package com.chintec.auth.config.selfauthor;
 
-import com.chintec.common.util.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;

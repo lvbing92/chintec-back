@@ -1,17 +1,12 @@
 package com.chintec.auth.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-
 import com.chintec.auth.entity.Credentials;
 import com.chintec.auth.entity.CredentialsAuthorities;
 import com.chintec.auth.service.IAuthorityService;
 import com.chintec.auth.service.ICredentialsAuthoritiesService;
 import com.chintec.auth.service.ICredentialsService;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,7 +28,7 @@ import java.util.stream.Collectors;
 public class UserDetailsServiceImpl implements UserDetailsService, Serializable {
 
     @Autowired
-    private ICredentialsService credentialsService;
+    private  ICredentialsService credentialsService;
     @Autowired
     private IAuthorityService iAuthorityService;
     @Autowired

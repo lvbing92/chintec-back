@@ -25,7 +25,6 @@ public class PayUtils {
      */
     public static String sign(String text, String key, String input_charset) {
         text = text + "&key=" + key;
-        System.out.println(text);
         return DigestUtils.md5Hex(getContentBytes(text, input_charset));
     }
 

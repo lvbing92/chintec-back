@@ -17,6 +17,6 @@ import java.io.Serializable;
  * @since 2020-08-26
  */
 @Service
-public class CredentialsServiceImpl extends ServiceImpl<CredentialsMapper, Credentials> implements ICredentialsService, Serializable {
+public class CredentialsServiceImpl extends ServiceImpl<CredentialsMapper, Credentials> implements ICredentialsService,Serializable {
 
 }

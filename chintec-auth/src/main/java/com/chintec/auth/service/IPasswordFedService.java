@@ -1,6 +1,5 @@
 package com.chintec.auth.service;
 
-import com.alibaba.fastjson.JSONObject;
 import com.chintec.common.util.ResultResponse;
 
 import javax.servlet.http.HttpServletRequest;

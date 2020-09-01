@@ -1,21 +1,15 @@
 package com.chintec.auth.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.chintec.auth.entity.OAuth2Token;
-import com.chintec.auth.entity.OauthClientDetails;
 import com.chintec.auth.service.IOauthClientDetailsService;
 import com.chintec.auth.service.IPasswordFedService;
 import com.chintec.common.enums.CommonCodeEnum;
-import com.chintec.common.util.AssertsUtil;
 import com.chintec.common.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.util.ObjectUtils;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,7 +40,7 @@ public class PasswordFedServiceImpl implements IPasswordFedService {
 
         OAuth2Token tokenMsg = null;
         try {
-            tokenMsg = getToken();
+            tokenMsg = getToken(request);
         } catch (Exception e) {
             return ResultResponse.failResponse(CommonCodeEnum.PARAMS_ERROR_CODE.getCode(), "用户名或密码错误");
         }
@@ -58,10 +52,10 @@ public class PasswordFedServiceImpl implements IPasswordFedService {
      *
      * @return
      */
-    public OAuth2Token getToken() {
+    public OAuth2Token getToken(HttpServletRequest request) {
         RestTemplate rest = new RestTemplate();
         RequestEntity<MultiValueMap<String, String>> requestEntity = new RequestEntity<>(
-                getBody(), getHeader(), HttpMethod.POST, URI.create(URL));
+                getBody(request), getHeader(), HttpMethod.POST, URI.create(URL));
 
         ResponseEntity<OAuth2Token> responseEntity = rest.exchange(
                 requestEntity, OAuth2Token.class);
@@ -77,9 +71,10 @@ public class PasswordFedServiceImpl implements IPasswordFedService {
      *
      * @return
      */
-    private MultiValueMap<String, String> getBody() {
+    private MultiValueMap<String, String> getBody(HttpServletRequest request) {
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
         formData.add("grant_type", "password");
+        //TODO 页面上输入的用户名和密码
         formData.add("username", "rubin");
         formData.add("password", "123456");
         //重定向地址

@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 @Data
 @Validated
 @RequestMapping("/v1")
-@Api(value = "Back Office User Login", tags = {"后台用户登入"})
+@Api(value = "Back Office User Login", tags = {"后台用户登入登出"})
 public class BackOfficeUserLoginController {
 
   @Autowired

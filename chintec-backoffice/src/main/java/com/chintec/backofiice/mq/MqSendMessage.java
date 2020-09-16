@@ -19,6 +19,7 @@ import java.util.UUID;
 @Slf4j
 @Component
 public class MqSendMessage {
+
     @Autowired
     private RabbitTemplate rabbitTemplate;
 

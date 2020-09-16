@@ -12,7 +12,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author ruBIn·lv
@@ -33,6 +33,9 @@ public class Authority extends Model<Authority> {
 
     @ApiModelProperty(value = "是否可用")
     private String enabled;
+
+    @ApiModelProperty(value = "备注")
+    private String remark;
 
     @ApiModelProperty(value = "创建时间")
     private String createTime;

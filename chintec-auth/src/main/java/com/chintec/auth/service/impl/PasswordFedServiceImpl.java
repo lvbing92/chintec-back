@@ -44,6 +44,8 @@ public class PasswordFedServiceImpl implements IPasswordFedService {
         } catch (Exception e) {
             return ResultResponse.failResponse(CommonCodeEnum.PARAMS_ERROR_CODE.getCode(), "用户名或密码错误");
         }
+        //查询用户角色，菜单
+
         return ResultResponse.successResponse("登录成功！",tokenMsg);
     }
 

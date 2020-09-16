@@ -85,7 +85,7 @@ public class CredentialsServiceImpl extends ServiceImpl<CredentialsMapper, Crede
         //查询用户
         Credentials credentials =getById(new QueryWrapper<Credentials>().lambda().eq(Credentials::getId,id));
         //查询当前用户角色
-        return ResultResponse.successResponse(credentials);
+        return ResultResponse.successResponse("查询用户详情成功",credentials);
     }
 
     @Override

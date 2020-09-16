@@ -2,6 +2,8 @@ package com.chintec.auth.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.chintec.auth.entity.Authority;
+import com.chintec.auth.request.AuthorityRequest;
+import com.chintec.auth.request.CredentialsRequest;
 import com.chintec.common.util.ResultResponse;
 
 /**
@@ -16,14 +18,15 @@ public interface IAuthorityService extends IService<Authority> {
     /**
      * 角色列表查询
      */
-    ResultResponse getRoleList();
+    ResultResponse getRoleList(Integer pageSize, Integer currentPage, String role,
+                               String status, String searchValue, String sorted);
 
     /**
      * 新增角色
      *
      * @return
      */
-    ResultResponse addRole();
+    ResultResponse addRole(AuthorityRequest authorityRequest);
 
     /**
      * 通过Id查询角色

@@ -1,6 +1,7 @@
 package com.chintec.auth.entity;
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,6 +17,7 @@ import java.io.Serializable;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
+@ApiModel(value = "AuthorityMenu", description = "角色与菜单关系信息")
 public class AuthorityMenu extends Model<AuthorityMenu> {
 
     private static final long serialVersionUID = 1L;

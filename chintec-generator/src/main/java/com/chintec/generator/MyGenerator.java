@@ -10,6 +10,6 @@ import com.chintec.generator.config.GeneratorConfig;
  */
 public class MyGenerator {
     public static void main(String[] args) {
-    GeneratorConfig.getMyGenerator("AuthorityMenu","authority_menu","rubIn·lv");
+    GeneratorConfig.getMyGenerator("TDepartment","t_department","rubIn·lv");
     }
 }
